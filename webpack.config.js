@@ -4,6 +4,7 @@ const FileManagerPlugin = require('filemanager-webpack-plugin');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const ImageMinimizerPlugin = require('image-minimizer-webpack-plugin');
 const fs = require('fs');
+const ESLintPlugin = require('eslint-webpack-plugin');
 
 const PAGES = fs.readdirSync(`./src/pages`);
 
@@ -74,6 +75,10 @@ module.exports = {
     }),
     new MiniCssExtractPlugin({
       filename: './css/[name].[contenthash].css'
+    }),
+    new ESLintPlugin({
+      extensions: ['.ts', '.js'],
+      exclude: 'node_modules'
     })
   ],
   optimization: {
