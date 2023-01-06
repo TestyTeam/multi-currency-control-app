@@ -57,6 +57,9 @@ module.exports = {
       },
     ]
   },
+  resolve: {
+    extensions: ['.js', '.json', '.html', '.ts']
+  },
   plugins: [
     new HtmlWebpackPlugin({
       template: path.join(__dirname, 'src', 'index.pug'),
@@ -76,10 +79,6 @@ module.exports = {
     new MiniCssExtractPlugin({
       filename: './css/[name].[contenthash].css'
     }),
-    new ESLintPlugin({
-      extensions: ['.ts', '.js'],
-      exclude: 'node_modules'
-    })
   ],
   optimization: {
     minimizer: [
