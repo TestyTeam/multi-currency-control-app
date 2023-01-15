@@ -58,6 +58,7 @@
     "webpack-dev-server": "^4.11.1"
   },
   "dependencies": {
+    "dotenv-webpack": "^8.0.1",
     "ky": "^0.33.1"
   }
 }

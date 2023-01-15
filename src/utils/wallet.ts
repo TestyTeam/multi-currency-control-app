@@ -1,6 +1,6 @@
 import { IWallet } from "../types/types";
 
-export const countFromAllWallets = (walletsArray: IWallet[], rates: any) => {
+export const countFromAllWallets = (walletsArray: IWallet[], rates: { [key: string]: number }) => {
 	let sum: number = 0;
 	walletsArray.forEach(wallet => {
 		sum += wallet.amount / properRate(wallet.currency, rates);
@@ -9,7 +9,7 @@ export const countFromAllWallets = (walletsArray: IWallet[], rates: any) => {
 	return sum;
 }
 
-function properRate(currency: string, rates: { string: number }): number {
+function properRate(currency: string, rates: { [key: string]: number }): number {
 	let rate: number = 0;
 	Object.entries(rates).forEach(([key, value]) => {
 		if (key === currency)
