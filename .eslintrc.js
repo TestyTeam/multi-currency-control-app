@@ -14,5 +14,10 @@ module.exports = {
     "sourceType": 'module',
   },
   "plugins": ["@typescript-eslint"],
-  "rules": {}
+  "rules": {
+    "linebreak-style": 0,
+    "consistent-return": 0,
+    "@typescript-eslint/no-unused-vars": 0,
+    "no-debugger": 0,
+  }
 };
