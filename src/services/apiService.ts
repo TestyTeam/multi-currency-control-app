@@ -10,6 +10,7 @@ async function handleResponse(response: Response) {
     const result = dataJson ?? dataText;
     return result;
   } catch (e) {
+    // TODO заменить нормальным оповещением об ошибке или сделать редайрект на страницу с ошибкой
     console.log(e, e);
   }
 }

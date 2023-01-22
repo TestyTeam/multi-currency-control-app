@@ -1,5 +1,5 @@
-import kyS from '../main-client';
-import { IWallet, ILatestRates } from '../../types/types';
+import kyS from '../apiService';
+import { ILatestRates } from '../../types/types';
 
 enum ECurrencyApis {
   API_LAYER = 'https://api.apilayer.com/exchangerates_data/',
@@ -12,23 +12,18 @@ export class CurrencyServiceClass {
   constructor() {
     this.currencyApi = kyS(ECurrencyApis.API_LAYER).extend({
       headers: {
-        apikey: process.env.API_KEY,
+        apikey: process.env.CURRENCIES_API_KEY,
       },
     });
   }
 
-  public async getRates(walletsArray: IWallet[], from: string): Promise<{ [key: string]: string }> {
-    const to: string = walletsArray.map((wallet) => wallet.currency).toString();
-    const params = {
-      symbols: to,
+  public async getRates(currencies: string[], from: string): Promise<{ [key: string]: string }> {
+    const searchParams = {
+      symbols: currencies.toString(),
       base: from,
     };
-    const response = await this.currencyApi.get(
-      'latest',
-      {
-        searchParams: params,
-      },
-    );
+
+    const response = await this.currencyApi.get('latest', { searchParams });
 
     const data: ILatestRates = await response.clone().json();
     return data.rates;

@@ -19,5 +19,9 @@ module.exports = {
     "consistent-return": 0,
     "@typescript-eslint/no-unused-vars": 0,
     "no-debugger": 0,
+    "no-param-reassign": 0,
+    "function-paren-newline": 0,
+    "no-return-assign": 0,
+    "arrow-body-style": 0
   }
 };

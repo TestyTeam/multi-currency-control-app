@@ -78,11 +78,11 @@ module.exports = {
       filename: `./pages/${page}/${page}.html`
     })),
     new FileManagerPlugin({
-        events: {
-            onStart: {
-                delete: ['dist']
-            }
-        }
+      events: {
+        onStart: {
+          delete: ['dist'],
+        },
+      }
     }),
     new MiniCssExtractPlugin({
       filename: './css/[name].[contenthash].css'
