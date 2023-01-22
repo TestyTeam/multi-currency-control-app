@@ -5,6 +5,7 @@ const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const ImageMinimizerPlugin = require('image-minimizer-webpack-plugin');
 const fs = require('fs');
 const ESLintPlugin = require('eslint-webpack-plugin');
+const DotenvWebpackPlugin = require('dotenv-webpack');
 
 const PAGES = fs.readdirSync(`./src/pages`);
 
@@ -57,7 +58,17 @@ module.exports = {
       },
     ]
   },
+  resolve: {
+    extensions: ['.js', '.json', '.html', '.ts']
+  },
   plugins: [
+    new ESLintPlugin({
+      extensions: ['.ts', '.js'],
+      exclude: 'node_modules',
+      fix: true,
+      quiet: true,
+    }),
+    new DotenvWebpackPlugin(),
     new HtmlWebpackPlugin({
       template: path.join(__dirname, 'src', 'index.pug'),
       filename: 'index.html',
@@ -67,19 +78,15 @@ module.exports = {
       filename: `./pages/${page}/${page}.html`
     })),
     new FileManagerPlugin({
-        events: {
-            onStart: {
-                delete: ['dist']
-            }
-        }
+      events: {
+        onStart: {
+          delete: ['dist'],
+        },
+      }
     }),
     new MiniCssExtractPlugin({
       filename: './css/[name].[contenthash].css'
     }),
-    new ESLintPlugin({
-      extensions: ['.ts', '.js'],
-      exclude: 'node_modules'
-    })
   ],
   optimization: {
     minimizer: [
